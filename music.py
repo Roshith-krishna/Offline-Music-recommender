@@ -3,7 +3,7 @@ import pandas as pd
 from sklearn.neighbors import NearestNeighbors
 from sklearn.preprocessing import StandardScaler
 import os
-dataset_path = "spotify_tracks.csv"
+dataset_path = "dataset.csv"
 
 class MusicEngine:
 
@@ -11,7 +11,7 @@ class MusicEngine:
         print("dataset loading...")
         self.df = pd.read_csv(dataset_path)
         self.df = self.df.dropna() 
-        self.df = self.df.drop_duplicates(subset=['track_name','artist_name'])
+        self.df = self.df.drop_duplicates(subset=['track_name','artists'])
         self.df = self.df.reset_index(drop=True)
         self.liked_file = "liked_songs.csv"
         self.disliked_file = "disliked_songs.csv"
@@ -116,7 +116,7 @@ if __name__ == "__main__":
                 if recs:
                     print(f"\nSongs similar to your search:")
                     for i, song in enumerate(recs):
-                        print(f"{i+1}. {song['track_name']} - {song['artist_name']}")
+                        print(f"{i+1}. {song['track_name']} - {song['artists']}")
                     
                     print("\nWhich ones do you LIKE? (Type numbers separated by space, e.g., '1 3')")
                     print("Press Enter to skip.")
@@ -134,7 +134,7 @@ if __name__ == "__main__":
                 if song is not None:
                     print("\n" + "-"*30)
                     print(f"I RECOMMEND:  {song['track_name']}")
-                    print(f"ARTIST:       {song['artist_name']}")
+                    print(f"ARTIST:       {song['artists']}")
                     print("-"*30)
                     feedback = input("\nDid you like this? (y = Yes / n = No / s = Skip): ").lower()
                     if feedback == 'y':
