@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+spotify_tracks.csv
+liked_songs.csv
+disliked_songs.csv
